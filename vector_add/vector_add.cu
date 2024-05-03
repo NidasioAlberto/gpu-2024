@@ -1,5 +1,7 @@
 #include <cuda_runtime.h>
-#define N (1 << 10)
+#include <cstdio>
+
+#define N 512
 
 __global__ void vector_add(int *a, int *b, int *c)
 {
@@ -33,8 +35,7 @@ int main()
     // Kernel launch
     dim3 blocksPerGrid(N / 256, 1, 1);
     dim3 threadsPerBlock(256, 1, 1);
-    vector_add<<<blocksPerGrid, threadsPerBlock>>>(d_va, d_vb,
-                                                   d_vc);
+    vector_add<<<blocksPerGrid, threadsPerBlock>>>(d_va, d_vb, d_vc);
 
     // GPU->CPU data transmission
     cudaMemcpy(h_vc, d_vc, N * sizeof(int),
@@ -44,6 +45,12 @@ int main()
     cudaFree(d_va);
     cudaFree(d_vb);
     cudaFree(d_vc);
+
+    printf("Ended\n");
+
+    for(int i = 0; i < N; i++) {
+        printf("%d + %d = %d\n", h_va[i], h_vb[i], h_vc[i]);
+    }
 
     return 0;
 }
