@@ -60,9 +60,9 @@ __global__ void convolution_tiled(float *__restrict__ input, float *__restrict__
 
     float value = 0.0f;
 
-    // #pragma unroll
+#pragma unroll
     for (int x_f = 0; x_f <= FILTER_DIM; x_f++) {
-        // #pragma unroll
+#pragma unroll
         for (int y_f = 0; y_f <= FILTER_DIM; y_f++) {
             // Global coordinates of current required cell
             int x_cell_global = x_data - FILTER_RADIUS + x_f;
