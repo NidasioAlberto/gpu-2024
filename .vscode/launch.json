@@ -5,7 +5,7 @@
             "name": "CUDA C++: Launch",
             "type": "cuda-gdb",
             "request": "launch",
-            "program": "${workspaceFolder}/vector_add/build/vector_add"
+            "program": "${workspaceFolder}/2_stencil/build/3_stencil_coarsening"
         }
     ]
 }
